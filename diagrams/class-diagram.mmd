@@ -1,0 +1,66 @@
+classDiagram
+    class CommandHandler {
+        <<interface>>
+        +execute(command) CommandResult
+    }
+    class RobotController {
+        -ConnectionManager connectionManager
+        -String robotId
+        -RobotStatus status
+        +execute(command) CommandResult
+        +connect() CommandResult
+        +stop() CommandResult
+        +getStatus() RobotStatus
+    }
+    class ConnectionManager {
+        <<interface>>
+        +connect() boolean
+        +send(command) CommandResult
+        +disconnect() void
+        +isConnected() boolean
+    }
+    class MockConnectionManager {
+        +connect() boolean
+        +send(command) CommandResult
+        +disconnect() void
+        +isConnected() boolean
+    }
+    class MissionManager {
+        -List~MissionRecord~ missions
+        +startMission(robotId) MissionRecord
+        +endMission(missionId) boolean
+        +getHistory() List
+    }
+    class MissionRecord {
+        -String missionId
+        -String robotId
+        -Instant startedAt
+        -Instant endedAt
+        -String status
+        +close() void
+        +summary() String
+    }
+    class RobotDashboard {
+        -RobotController controller
+        -MissionManager missionManager
+        +run() void
+    }
+    class CommandResult {
+        -boolean success
+        -String message
+        +isSuccess() boolean
+        +getMessage() String
+    }
+    class RobotStatus {
+        -String state
+        -Instant updatedAt
+        +getState() String
+    }
+    CommandHandler <|.. RobotController
+    ConnectionManager <|.. MockConnectionManager
+    RobotController --> ConnectionManager : uses
+    RobotController --> RobotStatus : reports
+    RobotController ..> CommandResult : returns
+    RobotDashboard --> RobotController : controls
+    RobotDashboard --> MissionManager : queries
+    MissionManager "1" o-- "*" MissionRecord : manages

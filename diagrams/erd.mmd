@@ -1,0 +1,36 @@
+erDiagram
+    OPERATOR ||--o{ MISSION : operates
+    ROBOT ||--o{ MISSION : performs
+    MISSION ||--o{ COMMAND_EVENT : records
+    MISSION ||--o{ CAPTURED_IMAGE : references
+    OPERATOR {
+        int operator_id PK
+        string username
+        string role
+    }
+    ROBOT {
+        int robot_id PK
+        string name
+        string connection_state
+    }
+    MISSION {
+        int mission_id PK
+        int operator_id FK
+        int robot_id FK
+        datetime started_at
+        datetime ended_at
+        string status
+    }
+    COMMAND_EVENT {
+        int event_id PK
+        int mission_id FK
+        string command
+        datetime occurred_at
+        string outcome
+    }
+    CAPTURED_IMAGE {
+        int image_id PK
+        int mission_id FK
+        string storage_reference
+        datetime captured_at
+    }

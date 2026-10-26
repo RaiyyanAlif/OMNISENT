@@ -1,0 +1,32 @@
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+
+# Java
+target/
+build/
+out/
+*.class
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# IDE / OS / secrets
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.env
+*.local

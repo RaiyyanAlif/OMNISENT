@@ -1,0 +1,12 @@
+flowchart TD
+    A([Start]) --> B[Review requirements and constraints]
+    B --> C[Design architecture and diagrams]
+    C --> D[Build Java domain model and interface]
+    D --> E[Test with mock communication adapter]
+    E --> F{Prototype requirements met?}
+    F -- No --> G[Correct design or implementation]
+    G --> D
+    F -- Yes --> H[Integrate communication and optional services]
+    H --> I[Controlled integration tests]
+    I --> J[Document results and limitations]
+    J --> K([Submission / review])

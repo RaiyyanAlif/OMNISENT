@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+actor Operator
+actor "Robot Controller\n(ESP8266 / Mega)" as Robot
+actor "Python Voice / Camera Service" as Py
+rectangle "OMNISENT System" {
+  usecase "Connect to Robot" as UC1
+  usecase "Send Movement Command" as UC2
+  usecase "Stop Robot" as UC3
+  usecase "View Robot Status" as UC4
+  usecase "Capture Image" as UC5
+  usecase "Start / End Mission" as UC6
+  usecase "View Mission History" as UC7
+  usecase "Record Command Event" as UC8
+}
+Operator --> UC1
+Operator --> UC2
+Operator --> UC3
+Operator --> UC4
+Operator --> UC5
+Operator --> UC6
+Operator --> UC7
+Robot --> UC2
+Robot --> UC3
+Robot --> UC4
+Py --> UC5
+UC2 .> UC8 : <<include>>
+UC3 .> UC8 : <<include>>
+UC6 .> UC8 : <<include>>
+@enduml

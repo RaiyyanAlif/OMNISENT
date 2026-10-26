@@ -1,0 +1,24 @@
+@startuml
+object "dashboard:RobotDashboard" as dashboard {
+  selectedView = "Control"
+}
+object "controller:RobotController" as controller {
+  robotId = "OMNI-01"
+}
+object "connection:MockConnectionManager" as connection {
+  connected = true
+}
+object "missions:MissionManager" as missions
+object "mission:MissionRecord" as mission {
+  missionId = "M-001"
+  status = "IN_PROGRESS"
+}
+object "status:RobotStatus" as status {
+  state = "CONNECTED"
+}
+dashboard --> controller : sends command
+dashboard --> missions : requests history
+controller --> connection : sends request
+controller --> status : reads
+missions o-- mission : contains
+@enduml

@@ -1,0 +1,14 @@
+flowchart LR
+    OP[Operator]
+    SYS((OMNISENT Application))
+    HW[ESP8266 and Arduino Robot]
+    PY[Python Voice / Camera Service]
+    DB[(Mission and Event Store)]
+    OP -->|Commands and mission actions| SYS
+    SYS -->|Validated commands| HW
+    HW -->|Connection and robot status| SYS
+    SYS -->|Capture or recognition request| PY
+    PY -->|Image reference, result, or error| SYS
+    SYS -->|Create/update records| DB
+    DB -->|Mission history| SYS
+    SYS -->|Status, history, errors| OP
